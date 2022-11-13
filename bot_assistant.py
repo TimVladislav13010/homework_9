@@ -1,7 +1,7 @@
 import sys
 
 
-def handler():
+def handler(comands):
 
     users_comands = {
         "hello": hello,
@@ -14,8 +14,7 @@ def handler():
         "exit": good_bye,
         ".": good_bye
     }
-    print(sys.argv[1])
-    return users_comands.get(sys.argv[1])
+    return users_comands.get(comands)
 
 
 def hello():
@@ -44,9 +43,12 @@ def good_bye():
 
 def main():
     while True:
-        handler_massage = handler()
-
+        handler_massage = handler(str(sys.argv[1]))
         if handler_massage == good_bye:
+            print(f"Good Bye!")
+            break
+        elif handler_massage == hello or add or change or phone or show_all:
+            handler_massage()
             break
 
 
