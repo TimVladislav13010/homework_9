@@ -1,6 +1,12 @@
 PHONE_BOOK = {"name": "number"}
 
 
+"""
+Бот помічник.
+Працює з командами (hello, add, change, phone, show_all, good_bye, close, exit, .)
+"""
+
+
 def input_error_index(func):
     def wrapper(*args, **kwargs):
         try:
