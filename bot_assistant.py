@@ -1,13 +1,26 @@
 import sys
 
 
-def input_error(func):
+def input_error_index(func):
     def wrapper(*args, **kwargs):
         try:
-            result = func(*args, *kwargs)
+            result = func(*args, **kwargs)
+            return result
+        except IndexError:
+            print(f"Введіть будь ласка команду (hello, add, change, phone, show_all, good_bye, close, exit, .)")
+
+    return wrapper
+
+
+def input_error_type(func):
+    def wrapper(*args, **kwargs):
+        try:
+            result = func(*args, **kwargs)
             return result
         except TypeError:
-            print(f"")
+            print(f"Неправильна команда. Введіть будь ласка команду"
+                  f" (hello, add, change, phone, show_all, good_bye, close, exit, .)")
+
     return wrapper
 
 
@@ -52,20 +65,20 @@ def good_bye():
     print("good_bye")
 
 
+@input_error_index
+@input_error_type
 def main():
     while True:
         handler_massage = handler(sys.argv[1])
+
         if handler_massage == good_bye:
             print(f"Good Bye!")
             break
-        elif handler_massage == hello or add or change or phone or show_all:
-            try:
-                handler_massage()
-            except TypeError:
-                print(f"Такої команди немає. "
-                      f"Введіть валідний аргумент (hello, add, change, phone, show_all, good_bye, close, exit, .)")
-            break
+
+        handler_massage()
+        break
 
 
 if __name__ == "__main__":
     main()
+
