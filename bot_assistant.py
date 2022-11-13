@@ -13,6 +13,7 @@ def input_error_index(func):
             return func(*args, **kwargs)
         except IndexError:
             print(f"Введіть будь ласка команду (hello, add, change, phone, show_all, good_bye, close, exit, .)")
+            main()
     return wrapper
 
 
@@ -23,6 +24,7 @@ def input_error_type(func):
         except TypeError:
             print(f"Неправильна команда. Введіть будь ласка команду"
                   f" (hello, add, change, phone, show_all, good_bye, close, exit, .)")
+            main()
     return wrapper
 
 
